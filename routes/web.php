@@ -21,6 +21,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('doc')->name('doc')->group(function () {
-    Route::get('/list', [App\Http\Controllers\HomeController::class, 't'])->name('list');
-});
+Route::resource('docs', \App\Http\Controllers\DocController::class);

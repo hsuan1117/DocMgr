@@ -27,7 +27,4 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function t(){
-        return view('docs.list')->with('docs',Auth::user()->docs());
-    }
 }
