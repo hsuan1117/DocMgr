@@ -15,6 +15,10 @@ class User extends Authenticatable
         return $this->hasMany(Doc::class);
     }
 
+    public function department(){
+        return $this->belongsToMany(Department::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

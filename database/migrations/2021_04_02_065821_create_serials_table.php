@@ -15,6 +15,7 @@ class CreateSerialsTable extends Migration
     {
         Schema::create('serials', function (Blueprint $table) {
             $table->id();
+            $table->uuid('department_id');
             $table->timestamps();
         });
     }
