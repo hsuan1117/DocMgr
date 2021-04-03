@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Model;
 
 class Serial extends Model
 {
@@ -11,4 +11,10 @@ class Serial extends Model
     public function department(){
         return $this->belongsTo(Department::class);
     }
+
+    public function docs(){
+        return $this->hasMany(Doc::class);
+    }
+
+
 }

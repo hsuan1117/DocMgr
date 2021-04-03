@@ -29,18 +29,23 @@ class DocController extends Controller
      */
     public function create()
     {
-        return View::make('docs.create');
+        return response()->view('docs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        if(Auth::check()){
+            Auth::user()->docs()->create($request->all());
+        }
+
+        return redirect()->to(route('docs.index'));
     }
 
     /**

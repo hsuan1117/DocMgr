@@ -16,6 +16,17 @@ class CreateDocsTable extends Migration
         Schema::create('docs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id');
+
+            $table->string('serial_number'); //發文 號
+            $table->uuid('serial_id'); //發文 字
+            $table->dateTime('date'); //發文日期
+            $table->uuid('receiver'); //受文者
+            $table->string('speed'); //速別
+            $table->string('confidentiality'); //密等
+
+            $table->string('subject'); //主旨
+            $table->longText('explanation'); //說明
+
             $table->timestamps();
         });
     }

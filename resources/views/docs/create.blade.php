@@ -14,6 +14,32 @@
                             </div>
                         @endif
                         <div class="form-group">
+                            <form action="{{route('docs.store')}}" method="post">
+                                <label for="receiver"></label>
+                                <input type="text" name="receiver" id="receiver">
+
+                                <label for="date"></label>
+                                <input type="date" name="date" id="date">
+
+                                <label for="serial_number"></label>
+                                <input type="text" name="serial_number" id="serial_number">
+
+                                <label for="speed"></label>
+                                <input type="text" name="speed" id="speed">
+
+                                <label for="confidentiality"></label>
+                                <input type="text" name="confidentiality" id="confidentiality">
+
+                                <label for="subject"></label>
+                                <input type="text" name="subject" id="subject">
+
+                                <label for="explanation"></label>
+                                <textarea name="explanation" id="explanation">
+
+                                </textarea>
+                                <button>送出</button>
+                                @csrf
+                            </form>
                             <div class="form-group">
                                 <label for="d_title" class="form-text">
                                     標題
