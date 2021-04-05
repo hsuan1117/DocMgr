@@ -32,6 +32,7 @@ class Doc extends Model
     ];
 
     protected $casts = [
-        'attachment' => 'array'
+        'attachment' => 'array',
+        'created_at' => 'datetime'
     ];
 }

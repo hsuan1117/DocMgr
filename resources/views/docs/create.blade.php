@@ -15,7 +15,7 @@
                         @endif
                         <div class="form-group">
                             <form action="{{route('docs.store')}}" method="post">
-                                <label for="receiver"></label>
+                                <label for="receiver">受文者</label>
                                 <input type="text" name="receiver" id="receiver">
 
                                 <label for="date"></label>
@@ -44,7 +44,7 @@
                                 <label for="d_title" class="form-text">
                                     標題
                                 </label>
-                                <input id="d_title" class="form-control" >
+                                <input id="d_title" class="form-control">
                             </div>
                         </div>
                         {{ __('DOCS will be CREATED HERE') }}
@@ -53,4 +53,34 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('other-scripts')
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/excite-bike/jquery-ui.css" rel="stylesheet"/>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $('#receiver').autocomplete({
+            source: function (request, response) {
+                // request物件只有一個term屬性，對應使用者輸入的文字
+                // response在你自行處理並獲取資料後，將JSON資料交給該函式處理，以便於autocomplete根據資料顯示列表
+                $.ajax({
+                    url: "{{route('users.query')}}",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "search": request.term
+                    },
+                    success: function (data) {
+                        response($.map(data.results, function (item) {
+                            return {
+                                label: `${item.text} <${item.id}>`,
+                                value: item.id
+                            }
+                        }));
+                    }
+                });
+            }
+        })
+    </script>
 @endsection

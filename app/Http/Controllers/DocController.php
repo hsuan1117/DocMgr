@@ -18,8 +18,9 @@ class DocController extends Controller
     public function index()
     {
         $user = auth()->user();
+        date_default_timezone_set("Asia/Taipei");
         return View::make('docs.index')
-            ->with('docs',$user->docs());
+            ->with('docs',$user->docs);
     }
 
     /**
