@@ -18,7 +18,7 @@ class CreateDocsTable extends Migration
             $table->uuid('user_id');
 
             $table->string('serial_number'); //發文 號
-            $table->uuid('serial_id'); //發文 字
+            $table->uuid('serial_id')->nullable(); //發文 字
             $table->dateTime('date'); //發文日期
             $table->uuid('receiver'); //受文者
             $table->string('speed'); //速別
