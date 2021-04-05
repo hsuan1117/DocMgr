@@ -1027,7 +1027,6 @@ SELECT|sys.sys_config
     <column id="314" parent="292" name="serial_id">
       <Position>4</Position>
       <DataType>char(36)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="315" parent="292" name="date">
       <Position>5</Position>
