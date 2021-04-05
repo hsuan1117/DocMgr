@@ -8,6 +8,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
+use PhpOffice\PhpWord\Shared\Html;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class DocController extends Controller
 {
@@ -59,7 +61,32 @@ class DocController extends Controller
      */
     public function show(Doc $doc)
     {
-        //
+        $templateProcessor = new TemplateProcessor(resource_path('asset/template1.docx'));
+
+
+        $receiver = User::find($doc->receiver)->name ?? "";
+         $templateProcessor->setValue('speed', $doc->speed);
+        //$templateProcessor->setValue('explanation', Html::addHtml($doc->explanation));
+        $templateProcessor->setValue('confidentiality', $doc->confidentiality);
+        $templateProcessor->setValue('date', $doc->date);
+        $templateProcessor->setValue('subject', $doc->subject);
+         $templateProcessor->setValue('sender', $receiver);
+        $templateProcessor->setValue('receiver', $receiver);
+
+        /*TODO:
+        把 parse html地方弄好
+        https://github.com/PHPOffice/PHPWord/issues/902#issuecomment-564561115
+        注意細節
+        */
+
+
+        //$xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($templateProcessor, 'Word2007');
+        try {
+            $templateProcessor->saveAs(storage_path($doc->id.'.docx'));
+        } catch (Exception $e) {
+        }
+
+        return response()->download(storage_path($doc->id.'.docx'));
     }
 
     /**

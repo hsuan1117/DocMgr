@@ -24,6 +24,7 @@
                                     </div>
                                     <div class="mb-1">{!! $doc->explanation !!}</div>
                                     <small>發文日期: {{$doc->created_at->format('Y/m/d') }}</small>
+                                    <a href="{{route('docs.show',$doc->id)}}">Word</a>
                                 </div>
 
                                 {{$doc}}

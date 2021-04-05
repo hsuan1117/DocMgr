@@ -59,7 +59,6 @@
                             <button type="submit" class="btn btn-primary">送出</button>
                             @csrf
                         </form>
-                        {{ __('DOCS will be CREATED HERE') }}
                     </div>
                 </div>
             </div>
