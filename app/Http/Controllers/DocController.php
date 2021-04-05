@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Doc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
@@ -19,8 +20,9 @@ class DocController extends Controller
     {
         $user = auth()->user();
         date_default_timezone_set("Asia/Taipei");
+        Carbon::setLocale('zh-TW');
         return View::make('docs.index')
-            ->with('docs',$user->docs);
+            ->with('docs',$user->docs->sortByDesc('created_at'));
     }
 
     /**

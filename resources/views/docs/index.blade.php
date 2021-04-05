@@ -13,26 +13,34 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <a href="{{route('docs.create')}}" class="btn btn-success">新增公文</a>
+                        <br>
                         <div class="list-group">
                             @foreach($docs as $doc)
-                                <a href="#" class="list-group-item list-group-item-action active">
+                                <div class="list-group-item border-2">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{{$doc->subject}}</h5>
-                                        <small>3 days ago</small>
+                                        <h5 class="mb-1 text-dark font-weight-bold">{{$doc->subject}}</h5>
+                                        <small>{{$doc->created_at->diffForHumans()}}</small>
                                     </div>
-                                    <p class="mb-1">{{$doc->explanation}}</p>
+                                    <div class="mb-1">{!! $doc->explanation !!}</div>
                                     <small>發文日期: {{$doc->created_at->format('Y/m/d') }}</small>
-                                </a>
+                                </div>
 
                                 {{$doc}}
                             @endforeach
                         </div>
 
-                        <a href="{{route('docs.create')}}" class="btn btn-success">新增公文</a>
-                        {{ __('DOCS will be LISTED HERE') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('other-scripts')
+    <style>
+        .border-2 {
+            border-width: 2px !important;
+        }
+    </style>
 @endsection
