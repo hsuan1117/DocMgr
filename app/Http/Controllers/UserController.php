@@ -90,19 +90,20 @@ class UserController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function query(Request $request){
-        $term = $request->search;
+        $term = $request->term;
         $users = User::where('email', 'like', '%' . $term . '%')
             ->orWhere('name', 'like', '%' . $term . '%')
             ->orWhere('id', 'like', '%' . $term . '%')
             ->get();
         $res = collect();
         foreach($users as $user){
-
             $res->push([
                 'id' => $user->id,
-                'text' => $user->email
+                'text' => $user->email."<".$user->id.">"
             ]);
         }
-        return response()->json(['results'=>$res]);
+        return response()->json([
+            'results'=>$res
+        ]);
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\User;
 use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\PhpWord;
 
 class DocController extends Controller
 {
@@ -65,19 +66,29 @@ class DocController extends Controller
 
 
         $receiver = User::find($doc->receiver)->name ?? "";
-         $templateProcessor->setValue('speed', $doc->speed);
+
+        $templateProcessor->setValue('speed', $doc->speed);
         //$templateProcessor->setValue('explanation', Html::addHtml($doc->explanation));
         $templateProcessor->setValue('confidentiality', $doc->confidentiality);
         $templateProcessor->setValue('date', $doc->date);
         $templateProcessor->setValue('subject', $doc->subject);
-         $templateProcessor->setValue('sender', $receiver);
+        $templateProcessor->setValue('sender', $receiver);
         $templateProcessor->setValue('receiver', $receiver);
+
+
 
         /*TODO:
         把 parse html地方弄好
         https://github.com/PHPOffice/PHPWord/issues/902#issuecomment-564561115
         注意細節
         */
+        $section = (new PhpWord())->addSection();
+        Html::addHtml($section, $doc->explanation, false, false);
+        $containers = $section->getElements();
+        $templateProcessor->cloneBlock('htmlblock', count($containers), true, true);
+        for($i = 0; $i < count($containers); $i++) {
+            $templateProcessor->setComplexBlock('html#' . ($i+1), $containers[$i]);
+        }
 
 
         //$xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($templateProcessor, 'Word2007');

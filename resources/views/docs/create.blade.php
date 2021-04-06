@@ -16,7 +16,7 @@
                         <form action="{{route('docs.store')}}" method="post" id="doc_create">
                             <div class="form-group">
                                 <label for="receiver">受文者</label>
-                                <input type="text" name="receiver" id="receiver" class="form-control">
+                                <select name="receiver" id="receiver" class="form-control" multiple></select>
                             </div>
 
                             <div class="form-group">
@@ -90,10 +90,8 @@
 
 
 @section('other-scripts')
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/css/custom-theme/jquery-ui-1.10.0.custom.css"
-        rel="stylesheet"/>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/27.0.0/classic/ckeditor.js"></script>
     <script>
         (function(global,ClassicEditor){
@@ -112,28 +110,17 @@
                 $('#dialog').modal()
             }
         })(window,ClassicEditor)
-        $('#receiver').autocomplete({
-            source: function (request, response) {
-                // request物件只有一個term屬性，對應使用者輸入的文字
-                // response在你自行處理並獲取資料後，將JSON資料交給該函式處理，以便於autocomplete根據資料顯示列表
-                $.ajax({
-                    url: "{{route('users.query')}}",
-                    type: "post",
-                    dataType: "json",
-                    data: {
-                        "search": request.term
-                    },
-                    success: function (data) {
-                        response($.map(data.results, function (item) {
-                            return {
-                                label: `${item.text} <${item.id}>`,
-                                value: item.id
-                            }
-                        }));
-                    }
-                });
+        $('#receiver').select2({
+            ajax: {
+                url: "{{route('users.query')}}",
+                method: "POST",
+                delay: 250,
+                dataType: 'json'
             }
-        })
+        });
+
+
+
         $("#doc_create").submit((e)=>{
             let editor = window.DocMgr.docEditor;
             let explanation = $(editor.getData())
