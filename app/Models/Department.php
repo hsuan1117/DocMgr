@@ -13,6 +13,10 @@ class Department extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function admins(){
+        return $this->belongsToMany(User::class);
+    }
+
     public function serials(){
         return $this->hasMany(Serial::class);
     }
