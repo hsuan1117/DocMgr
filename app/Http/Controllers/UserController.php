@@ -99,7 +99,7 @@ class UserController extends Controller
         foreach($users as $user){
             $res->push([
                 'id' => $user->id,
-                'text' => $user->email."<".$user->id.">"
+                'text' => $user->name."(".$user->email.")"."<".$user->id.">"
             ]);
         }
         return response()->json([

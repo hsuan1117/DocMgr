@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public function docs(): \Illuminate\Database\Eloquent\Relations\HasMany {
+    public function docs() {
         return $this->hasMany(Doc::class);
     }
 
