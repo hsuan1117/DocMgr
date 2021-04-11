@@ -15,7 +15,7 @@ class User extends Authenticatable
         return $this->hasMany(Doc::class);
     }
 
-    public function department(){
+    public function departments(){
         return $this->belongsToMany(Department::class);
     }
 

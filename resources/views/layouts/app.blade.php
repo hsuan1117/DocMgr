@@ -63,6 +63,10 @@
                                         {{ __('公文') }}
                                     </a>
 
+                                    <a class="dropdown-item" href="{{ route('departments.index') }}">
+                                        {{ __('部門') }}
+                                    </a>
+
                                     <!-- Logout -->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

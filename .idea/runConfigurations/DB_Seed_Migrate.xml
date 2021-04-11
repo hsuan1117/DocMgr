@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DB Seed Migrate" type="PhpLocalRunConfigurationType" factoryName="PHP Console" activateToolWindowBeforeRun="false" path="$PROJECT_DIR$/artisan" scriptParameters="migrate:refresh --seed">
+    <method v="2" />
+  </configuration>
+</component>

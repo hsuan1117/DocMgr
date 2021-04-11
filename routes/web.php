@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('docs', \App\Http\Controllers\DocController::class);
+Route::resource('departments', \App\Http\Controllers\DepartmentController::class);

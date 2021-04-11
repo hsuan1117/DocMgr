@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/users/query', [\App\Http\Controllers\UserController::class,'query'])->name('users.query');
+Route::post('/users/get', [\App\Http\Controllers\UserController::class,'getUser'])->name('users.get');
+
+Route::post('/users/department',[\App\Http\Controllers\DepartmentController::class,'queryDepartmentUsers'])->name('users.departments.query');

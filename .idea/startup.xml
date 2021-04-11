@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectStartupSharedConfiguration">
     <configurations>
-      <configuration id="Shell Script.Artisan Serve" name="Artisan Serve" />
+      <configuration id="PHP Script.Server" name="Server" />
     </configurations>
   </component>
 </project>

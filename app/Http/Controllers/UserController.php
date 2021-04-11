@@ -106,4 +106,20 @@ class UserController extends Controller
             'results'=>$res
         ]);
     }
+
+    /**
+     * 取得用戶
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getUser(Request $request){
+        $id = $request->id;
+        $user = User::find($id)->first();
+
+        return response()->json([
+            'id' => $user->id,
+            'text' => $user->name."(".$user->email.")"."<".$user->id.">"
+        ]);
+    }
 }
